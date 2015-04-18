@@ -1,1 +1,1 @@
-# teapot_diplomacy
+Ludum Dare 32! #teapotdiplomacy
