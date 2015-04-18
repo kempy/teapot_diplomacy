@@ -6,4 +6,5 @@ var init = function() {
     circle.y = 100;
     stage.addChild(circle);
     stage.update();
+    console.log(GLOBALS);
 };
