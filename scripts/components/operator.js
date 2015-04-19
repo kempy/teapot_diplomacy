@@ -14,19 +14,21 @@ var createOperator = function(x, y) {
     var gates = evt.target.stage.gates;
     var noMatch = true;
     for (var i = 0; i < gates.length; i++) {
-      if (checkIntersection(operator, gates[i]) && !gates[i].full()) {
+      var gate = gates[i];
+      if (checkIntersection(operator, gate.shape) && !gate.isFull()) {
         noMatch = false;
-        snapToIntersection(evt.target, gates[i]);
+        snapToIntersection(operator, gate);
       } else {
-        if (gates[i].operator && (gates[i].operator.id == operator.id)) {
-          gates[i].operator = null;
+        if (gate.containsOperator(operator)) {
+          gate.operator = null;
         }
       }
     };
     if (noMatch) {
       for (var i = 0; i < gates.length; i++) {
-        if (gates[i].operator && (gates[i].operator.id == operator.id)) {
-          gates[i].operator = null;
+        var gate = gates[i];
+        if (gate.containsOperator(operator)) {
+          gate.operator = null;
         }
       };
       snapToOriginalIntersection(operator, operator.starting);
@@ -35,12 +37,12 @@ var createOperator = function(x, y) {
   return block;
 };
 
-var checkIntersection = function(operator, gate) {
+var checkIntersection = function(operator, gateShape) {
   var absoluteBounds = operator.getTransformedBounds();
   var absoluteCenterX = absoluteBounds.x + (absoluteBounds.width / 2);
   var absoluteCenterY = absoluteBounds.y + (absoluteBounds.height / 2);
   var centerBounds = new createjs.Rectangle(absoluteCenterX, absoluteCenterY);
-  if (centerBounds.intersects(gate.getTransformedBounds())) {
+  if (centerBounds.intersects(gateShape.getTransformedBounds())) {
     if (!printed) {
       console.log('Intersected!');
       printed = true;
@@ -55,7 +57,7 @@ var snapToOriginalIntersection = function(operator, point) {
 };
 
 var snapToIntersection = function(operator, gate) {
-  var bounds = gate.getTransformedBounds();
+  var bounds = gate.shape.getTransformedBounds();
   gate.operator = operator;
   operator.x = bounds.x + (bounds.width / 2);
   operator.y = bounds.y + (bounds.height / 2);
