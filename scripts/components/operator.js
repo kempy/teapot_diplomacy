@@ -1,5 +1,7 @@
-var Operator = function(x, y) {
+var Operator = function(kind, x, y) {
   var that = this;
+  this.kind = kind;
+  this.operation = OPERATIONS[kind];
   this.startingPoint = { 'x': x, 'y': y };
   this.shape = this.createOperatorShape(x, y);
   this.shape.on('pressmove', function(evt) {
@@ -35,7 +37,6 @@ var Operator = function(x, y) {
 };
 
 var printed = false;
-
 
 Operator.prototype.checkIntersection = function(gateShape) {
   var absoluteBounds = this.shape.getTransformedBounds();
@@ -75,4 +76,41 @@ Operator.prototype.createOperatorShape = function(x, y) {
   block.regY = 25;
   block.setBounds(0, 0, 50, 50);
   return block;
+};
+
+var AND_FUNCTION = function(x, y) {
+    return x & y;
+};
+
+var OR_FUNCTION = function(x, y) {
+    return x | y;
+};
+
+var XOR_FUNCTION = function(x, y) {
+    return x ^ y;
+};
+
+var NOT_FUNCTION = function(x) {
+  return ~x;
+};
+
+var NAND_FUNCTION = function(x, y) {
+    return ~(x & y);
+};
+
+var NOR_FUNCTION = function(x, y) {
+    return ~(x | y);
+};
+
+var XNOR_FUNCTION = function(x, y) {
+    return ~(x ^ y);
+};
+
+OPERATIONS = {
+  AND: AND_FUNCTION,
+  OR: OR_FUNCTION,
+  XOR: XOR_FUNCTION,
+  NAND: NAND_FUNCTION,
+  NOR: NOR_FUNCTION,
+  XNOR_FUNCTION: XNOR_FUNCTION
 };

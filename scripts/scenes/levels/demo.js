@@ -1,7 +1,7 @@
 var initDemoLevel = function(level) {
   var stage = level.stage;
-  var operator = new Operator(50, 100);
-  var otherOperator = new Operator(50, 200);
+  var operator = new Operator('AND', 50, 100);
+  var otherOperator = new Operator('OR', 50, 200);
   var gate = new Gate(150, 150);
   var otherGate = new Gate(150, 50);
   stage.addChild(gate.shape);
