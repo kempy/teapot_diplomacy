@@ -1,7 +1,7 @@
 var printed = false;
 
-var createOperator = function() {
-  var block = createBlock();
+var createOperator = function(x, y) {
+  var block = createBlock(x, y);
 
   block.on('pressmove', function(evt) {
     evt.target.x = evt.stageX;
@@ -44,11 +44,11 @@ var snapToIntersection = function(operator, gate) {
 /**
  * Create block shape.
  */
-var createBlock = function() {
+var createBlock = function(x, y) {
   var block = new createjs.Shape();
   block.graphics.beginFill('DeepSkyBlue').drawRect(0, 0, 50, 50);
-  block.x = 100;
-  block.y = 100;
+  block.x = x;
+  block.y = y;
   block.regX = 25;
   block.regY = 25;
   block.setBounds(0, 0, 50, 50);
