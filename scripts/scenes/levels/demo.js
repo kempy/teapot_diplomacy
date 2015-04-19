@@ -8,9 +8,24 @@ var initDemoLevel = function(level) {
   var input = new Input(100, 25);
   var inputLine = input.drawTo(gate);
 
+  var connection_points = {
+    0: input,
+    1: gate,
+    2: otherGate
+  };
+  var circuit_matrix = [
+    [0, 1, 0],
+    [0, 0, 1],
+    [0, 0, 0]
+  ];
+
+  var circuit = new Circuit(connection_points, circuit_matrix);
+
   // Add all lines, then all gates, then all operators.
-  stage.addChild(inputLine);
-  stage.addChild(line);
+  lines = circuit.lines();
+  for (var i = 0; i < lines.length; i++) {
+    stage.addChild(lines[i]);
+  }
 
   stage.addChild(input.shape);
   stage.addChild(gate.shape);
@@ -21,13 +36,4 @@ var initDemoLevel = function(level) {
 
   // Register all gates on the stage.
   stage.gates = [gate, otherGate];
-
-  var connection_points = ['a', 'b', 'c', 'gate1', 'gate2', 'output'];
-  var circuit = [
-    [0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 1]
-  ];
 };
