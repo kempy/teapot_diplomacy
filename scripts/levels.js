@@ -15,14 +15,20 @@ function makeLevelManager() {
     getLevel: function(name) {
       return self.levels[name];
     },
-    createLevel: function (name) {
-      level = {
+    createLevel: function (name, initFn) {
+      var level = {
         name: name,
+        init: initFn,
         stage: new createjs.Stage('mainCanvas'),
         tick: function() {},
       };
       self.levels[name] = level;
       return level;
+    },
+    startLevel: function(name) {
+      var level = self.getLevel(name);
+      level.init(level);
+      self.swapLevel(name);
     },
     swapLevel: function (name) {
       if (currentLevel) {
