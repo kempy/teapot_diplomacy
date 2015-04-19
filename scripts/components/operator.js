@@ -18,10 +18,10 @@ var createOperator = function(x, y) {
         noMatch = false
         snapToIntersection(evt.target, gates[i]);
       }
-      else if (noMatch && (i == (gates.length - 1))) {
-        snapToOriginalIntersection(operator, operator.starting);
-      }
     };
+    if (noMatch) {
+      snapToOriginalIntersection(operator, operator.starting);
+    }
   });
   return block;
 };
