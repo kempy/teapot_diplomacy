@@ -91,19 +91,19 @@ var XOR_FUNCTION = function(x, y) {
 };
 
 var NOT_FUNCTION = function(x) {
-  return ~x;
+  return !x;
 };
 
 var NAND_FUNCTION = function(x, y) {
-    return ~(x & y);
+    return !(x & y);
 };
 
 var NOR_FUNCTION = function(x, y) {
-    return ~(x | y);
+    return !(x | y);
 };
 
 var XNOR_FUNCTION = function(x, y) {
-    return ~(x ^ y);
+    return !(x ^ y);
 };
 
 OPERATIONS = {
