@@ -7,7 +7,7 @@ Circuit.prototype.lines = function() {
   var connections = [];
   for (var i = 0; i < this.matrix.length; i++) {
   	var toList = this.matrix[i];
-	  for (var j = 0; j < this.matrix.length; j++) {
+	  for (var j = 0; j < toList.length; j++) {
 	  	var isConnected = toList[j] == 1;
 	  	if (isConnected) {
 	  		var from = this.connection_points[i];

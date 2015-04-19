@@ -11,6 +11,6 @@ var createInputShape = function(x, y) {
   inputShape.graphics.beginFill('LightGrey').drawCircle(10, 10, 10);
   inputShape.x = x;
   inputShape.y = y;
-  inputShape.setBounds(0, 0, 20, 20)
+  inputShape.setBounds(0, 0, 20, 20);
   return inputShape;
 };
