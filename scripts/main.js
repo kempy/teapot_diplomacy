@@ -1,3 +1,4 @@
+window.teapot = { };
 var init = function() {
   var stage = new createjs.Stage('mainCanvas');
   var operator = createOperator(50, 100);
