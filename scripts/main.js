@@ -1,6 +1,14 @@
 window.teapot = { };
-var init = function() {
-  var stage = new createjs.Stage('mainCanvas');
+var teapot = window.teapot;
+
+/**
+ * Init function.
+ */
+teapot.init = function() {
+  teapot.levelManager = makeLevelManager();
+  var lm = teapot.levelManager;
+  var demoLevel = lm.createLevel('demo');
+  var stage = demoLevel.stage;
   var operator = createOperator(50, 100);
   var otherOperator = createOperator(50, 200);
   var gate = createGate(150, 150);
