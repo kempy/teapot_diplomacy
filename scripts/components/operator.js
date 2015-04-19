@@ -16,6 +16,9 @@ var createOperator = function(x, y) {
       if (checkIntersection(operator, gates[i])) {
         snapToIntersection(evt.target, gates[i]);
       }
+      else if (i == gates.length -1) {
+        snapToOriginalIntersection(operator, operator.starting);
+      }
     };
   });
   return block;
@@ -35,6 +38,11 @@ var checkIntersection = function(operator, gate) {
   }
 };
 
+var snapToOriginalIntersection = function(operator, point) {
+  operator.x = point.x
+  operator.y = point.y
+};
+
 var snapToIntersection = function(operator, gate) {
   var bounds = gate.getTransformedBounds();
   operator.x = bounds.x + (bounds.width / 2);
@@ -49,6 +57,7 @@ var createBlock = function(x, y) {
   block.graphics.beginFill('DeepSkyBlue').drawRect(0, 0, 50, 50);
   block.x = x;
   block.y = y;
+  block.starting = { "x": x, "y": y };
   block.regX = 25;
   block.regY = 25;
   block.setBounds(0, 0, 50, 50);
