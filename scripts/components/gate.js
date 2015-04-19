@@ -4,5 +4,9 @@ var createGate = function(x, y) {
   snapBox.x = x;
   snapBox.y = y;
   snapBox.setBounds(0, 0, 80, 80)
+  snapBox.operator = null;
+  snapBox.full = function() {
+    return !!(snapBox.operator);
+  };
   return snapBox;
 };

@@ -12,14 +12,23 @@ var createOperator = function(x, y) {
   block.on('pressup', function(evt) {
     var operator = evt.target;
     var gates = evt.target.stage.gates;
-    var noMatch = true
+    var noMatch = true;
     for (var i = 0; i < gates.length; i++) {
-      if (checkIntersection(operator, gates[i])) {
-        noMatch = false
+      if (checkIntersection(operator, gates[i]) && !gates[i].full()) {
+        noMatch = false;
         snapToIntersection(evt.target, gates[i]);
+      } else {
+        if (gates[i].operator && (gates[i].operator.id == operator.id)) {
+          gates[i].operator = null;
+        }
       }
     };
     if (noMatch) {
+      for (var i = 0; i < gates.length; i++) {
+        if (gates[i].operator && (gates[i].operator.id == operator.id)) {
+          gates[i].operator = null;
+        }
+      };
       snapToOriginalIntersection(operator, operator.starting);
     }
   });
@@ -47,6 +56,7 @@ var snapToOriginalIntersection = function(operator, point) {
 
 var snapToIntersection = function(operator, gate) {
   var bounds = gate.getTransformedBounds();
+  gate.operator = operator;
   operator.x = bounds.x + (bounds.width / 2);
   operator.y = bounds.y + (bounds.height / 2);
 };
