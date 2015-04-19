@@ -8,7 +8,7 @@ Gate.prototype.isFull = function() {
 };
 
 Gate.prototype.containsOperator = function(operator) {
-  return !!(this.operator && (this.operator.id == operator.id));
+  return !!(this.operator && (this.operator.shape.id == operator.shape.id));
 };
 
 var createGateShape = function(x, y) {
