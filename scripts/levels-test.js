@@ -1,31 +1,31 @@
 window.teapot = { };
 var init = function() {
-		SM = makeStageManager();
-		window.teapot.StageManager = SM;
-		stage1 = SM.createStage('one');
-		stage2 = SM.createStage('two');
+		LM = makeLevelManager();
+		window.teapot.LevelManager = LM;
+		level1 = LM.createLevel('one');
+		level2 = LM.createLevel('two');
 		circle1 = makeCircle('DeepSkyBlue');
 		circle2 = makeCircle('Green');
-    stage1.stage.addChild(circle1.object);
+    level1.stage.addChild(circle1.object);
 		console.log(circle1);
-		stage1.tick = function() {
+		level1.tick = function() {
 			bounceObject(circle1);
 		};
-    stage2.stage.addChild(circle2.object);
+    level2.stage.addChild(circle2.object);
 		console.log(circle2);
-		stage2.tick = stageBouncerCreate(circle2);
-		SM.init();
-		SM.swapStage(stage1);
-		setInterval(function () { switchStage(SM); }, 2000);
+		level2.tick = stageBouncerCreate(circle2);
+		LM.init();
+		LM.swapLevel('one');
+		setInterval(function () { switchLevel(LM); }, 2000);
 };
 
-function switchStage(SM) {
-	console.log(SM.stages);
-	console.log(SM.currentStageName());
-	if (SM.currentStageName() == 'one') {
-		SM.swapStage(SM.getStage('two'));
-	} else if (SM.currentStageName() == 'two') {
-		SM.swapStage(SM.getStage('one'));
+function switchLevel(LM) {
+	console.log(LM.levels);
+	console.log(LM.currentLevelName());
+	if (LM.currentLevelName() == 'one') {
+		LM.swapLevel('two');
+	} else if (LM.currentLevelName() == 'two') {
+		LM.swapLevel('one');
 	}
 }
 
