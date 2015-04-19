@@ -18,6 +18,7 @@ function makeLevelManager() {
     createLevel: function (name, initFn) {
       var level = {
         name: name,
+        params: {},
         init: initFn,
         stage: new createjs.Stage('mainCanvas'),
         tick: function() {},
