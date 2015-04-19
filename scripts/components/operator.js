@@ -12,11 +12,13 @@ var createOperator = function(x, y) {
   block.on('pressup', function(evt) {
     var operator = evt.target;
     var gates = evt.target.stage.gates;
+    var noMatch = true
     for (var i = 0; i < gates.length; i++) {
       if (checkIntersection(operator, gates[i])) {
+        noMatch = false
         snapToIntersection(evt.target, gates[i]);
       }
-      else if (i == gates.length -1) {
+      else if (noMatch && (i == (gates.length - 1))) {
         snapToOriginalIntersection(operator, operator.starting);
       }
     };
