@@ -4,10 +4,13 @@ var init = function() {
   var gate = createGate();
   stage.addChild(gate);
   stage.addChild(operator);
+
+  // Register all gates on the stage.
+  stage.gates = [];
+  stage.gates[stage.gates.length] = gate;
   stage.update();
   function handleTick(event) {
     stage.update();
-    checkIntersection(operator, gate);
   }
   createjs.Ticker.addEventListener('tick', handleTick);
 };

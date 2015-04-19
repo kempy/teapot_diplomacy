@@ -1,20 +1,27 @@
-var moved = false;
+var printed = false;
 
 var createOperator = function() {
-  var block = createBlock(); 
+  var block = createBlock();
+
   block.on('pressmove', function(evt) {
     evt.target.x = evt.stageX;
     evt.target.y = evt.stageY;
     printed = false;
   });
+
   block.on('pressup', function(evt) {
-    // TODO: add snap code.
-    console.log('press up');
+    var operator = evt.target;
+    var gates = evt.target.stage.gates;
+    for (var i = 0; i < gates.length; i++) {
+      if (checkIntersection(operator, gates[i])) {
+        snapToIntersection(evt.target, gates[i]);
+      }
+    };
   });
   return block;
 };
 
-var checkIntersection  = function(operator, gate) {
+var checkIntersection = function(operator, gate) {
   var absoluteBounds = operator.getTransformedBounds();
   var absoluteCenterX = absoluteBounds.x + (absoluteBounds.width / 2);
   var absoluteCenterY = absoluteBounds.y + (absoluteBounds.height / 2);
@@ -26,6 +33,12 @@ var checkIntersection  = function(operator, gate) {
     }
     return true;
   }
+};
+
+var snapToIntersection = function(operator, gate) {
+  var bounds = gate.getTransformedBounds();
+  operator.x = bounds.x + (bounds.width / 2);
+  operator.y = bounds.y + (bounds.height / 2);
 };
 
 /**
