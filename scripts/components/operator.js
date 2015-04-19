@@ -11,17 +11,17 @@ var Operator = function(x, y) {
     var operator = that;
     var gates = evt.target.stage.gates;
     var noMatch = true;
+    // Check if the operator instersects any of the gates.
     for (var i = 0; i < gates.length; i++) {
       var gate = gates[i];
       if (operator.checkIntersection(gate.shape) && !gate.isFull()) {
         noMatch = false;
         operator.snapToGate(gate);
-      } else {
-        if (gate.containsOperator(operator)) {
-          gate.operator = null;
-        }
+      } else if (gate.containsOperator(operator)) {
+        gate.operator = null;
       }
     };
+    // If the operator does not intersect, check all the gates for the operator to clear.
     if (noMatch) {
       for (var i = 0; i < gates.length; i++) {
         var gate = gates[i];
