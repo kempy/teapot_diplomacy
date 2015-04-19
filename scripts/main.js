@@ -1,10 +1,13 @@
 var init = function() {
-    var stage = new createjs.Stage('mainCanvas');
-    var circle = new createjs.Shape();
-    circle.graphics.beginFill('DeepSkyBlue').drawCircle(0, 0, 50);
-    circle.x = 100;
-    circle.y = 100;
-    stage.addChild(circle);
+  var stage = new createjs.Stage('mainCanvas');
+  var operator = createOperator();
+  var gate = createGate();
+  stage.addChild(gate);
+  stage.addChild(operator);
+  stage.update();
+  function handleTick(event) {
     stage.update();
-    console.log(GLOBALS);
+    checkIntersection(operator, gate);
+  }
+  createjs.Ticker.addEventListener('tick', handleTick);
 };
