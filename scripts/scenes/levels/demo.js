@@ -34,7 +34,12 @@ var initDemoLevel = function(level) {
 
   level.tick = function() {
     if (playableCircuit.done) {
-      lm.startLevel('finish');
+      function nextStageFn(evt) {
+        lm.startLevel('finish');
+        evt.target.removeEventListener('stagemouseup', nextStageFn);
+      };
+      stage.addEventListener('stagemouseup', nextStageFn);
+      playableCircuit.done = false;
     }
   }
 };
