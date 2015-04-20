@@ -33,6 +33,7 @@ var Operator = function(kind, x, y) {
       };
       operator.snapToStartingPoint();
     }
+    evt.target.stage.playableCircuit.checkAllInputs();
   });
 };
 
@@ -112,5 +113,6 @@ OPERATIONS = {
   XOR: XOR_FUNCTION,
   NAND: NAND_FUNCTION,
   NOR: NOR_FUNCTION,
-  XNOR_FUNCTION: XNOR_FUNCTION
+  XNOR: XNOR_FUNCTION,
+  NOT: NOT_FUNCTION
 };

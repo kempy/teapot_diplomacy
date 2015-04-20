@@ -102,7 +102,7 @@ Circuit.prototype.getOutputForNode = function(nodeIndex, inputValues) {
 	} else if (node instanceof Output) {
 		var incomingNodeIndex = this.getIncomingNodeIndices(nodeIndex);
 		retValue = this.getOutputForNode(
-			incomingNodeIndex[0], inputNodeIndices, inputValues);
+			incomingNodeIndex[0], inputValues);
 	} else if (node instanceof Gate) {
 		// Find all incoming values.
 		var incomingNodeIndices = this.getIncomingNodeIndices(nodeIndex);
@@ -129,7 +129,7 @@ Circuit.prototype.validateCircuit = function(inputValues) {
   this.CIRCUIT_VALIDATOR = {};
   // For every output node, get 
   for (var i = 0; i < this.outputNodeIndices.length; i++) {
-  	this.getOutputForNode(i, inputValues);
+  	this.getOutputForNode(this.outputNodeIndices[i], inputValues);
   }
   for (var i in this.CIRCUIT_VALIDATOR) {
   	resultOutputs.push(this.CIRCUIT_VALIDATOR[i]);
