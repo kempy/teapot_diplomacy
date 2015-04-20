@@ -43,7 +43,7 @@ InputSet.prototype.createImage = function(src) {
 }
 
 InputSet.prototype.createContainer = function() {
-  this.container.x = 500;
+  this.container.x = 550;
   this.container.y = (this.index * (this.height + this.offset));
   var increment = this.width / (this.input.length + 1);
   var margin = 6;

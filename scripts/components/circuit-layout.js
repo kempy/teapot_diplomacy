@@ -1,18 +1,19 @@
-var CircuitLayout = function(x, y, height, width) {
+var CircuitLayout = function(x, y, width, height) {
   this.x = x;
   this.y = y;
   this.height = height;
   this.width = width;
+  this.operatorWidth = 100;
 }
 
 CircuitLayout.prototype.layoutPattern = function(pattern) {
   var verticalInt = this.height / (pattern.length + 1)
   for (var i = 0; i < pattern.length; i++) {
-    var y = verticalInt * (i + 1) + this.y;
+    var y = verticalInt * (i + 1) + this.y + 40;
     var row = pattern[i];
     var horizInt = this.width / (pattern[i].length + 1);
     for (var j = 0; j < row.length; j++) {
-      var x = horizInt * (j + 1) + this.x;
+      var x = horizInt * (j + 1) + this.x + this.operatorWidth;
       // console.log('i=', i, ', j=', j, ', x=', x, ', y=', y);
       if (row[j] != null) {
         row[j].shape.x = x;
@@ -42,4 +43,19 @@ CircuitLayout.prototype.generatePattern = function(circuit, layout) {
     pattern.push(row);
   }
   return pattern;
+}
+
+CircuitLayout.prototype.layoutOperators = function(operators) {
+  var verticalInt = this.height / (operators.length + 1);
+  var x = (this.operatorWidth / 2);
+  for (var i = 0; i < operators.length; i++) {
+    var operator = operators[i];
+    if (operator != null) {
+      var y = verticalInt * (i + 1) + this.y;
+      operator.startingPoint['x'] = x;
+      operator.shape.x = x;
+      operator.startingPoint['y'] = y;
+      operator.shape.y = y;
+    }
+  }
 }
