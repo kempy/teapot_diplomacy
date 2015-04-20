@@ -21,9 +21,11 @@ var initDemoLevel = function(level) {
   circuit.addConnections(stage);
   circuit.addNodes(stage);
 
-  var playableCircuit = new PlayableCircuit([[0, 1]], [1], circuit);
+  var playableCircuit = new PlayableCircuit(
+    [[1, 0], [0, 1]], [1], circuit);
   stage.addChild(operator.shape);
   stage.addChild(otherOperator.shape);
+  playableCircuit.addInputSetsToStage(stage);
 
   // Register all gates on the stage.
   stage.gates = [gate, otherGate];

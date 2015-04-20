@@ -4,19 +4,41 @@ var PlayableCircuit = function (inputs, output, circuit) {
   this.circuit = circuit;
   this.selectedInput = 0;
   this.correctInputs = [];
+  this.inputSets = [];
+  this.done = false;
   // Set all inputs to be false to start;
-  this.resetInputs();
 };
 
+PlayableCircuit.prototype.addInputSetsToStage = function (stage) {
+  for (var i = 0; i < this.inputs.length; i++) {
+    var inputSet = new InputSet(this, this.inputs[i], i);
+    inputSet.createContainer();
+    stage.addChild(inputSet.container);
+    this.inputSets.push(inputSet);
+  }
+  this.selectInput(this.selectedInput, true);
+  this.resetInputs();
+}
+
 PlayableCircuit.prototype.resetInputs = function () {
-  for (var input = 0; input < this.inputs.length; input++) {
-    this.correctInputs[input] = false;
+  for (var index = 0; index < this.inputs.length; index++) {
+    this.correctInputs[index] = false;
+    this.inputSets[index].setStatus(false);
   }
   this.circuit.colorConnections(null);
 };
 
-PlayableCircuit.prototype.selectInput = function (index) {
+PlayableCircuit.prototype.selectInput = function (index, force) {
+  if (index == this.selectedInput && force != true) {
+    return;
+  }
+  var oldIndex = this.selectedInput;
   this.selectedInput = index; 
+  this.inputSets[oldIndex].deselect();
+  this.inputSets[index].select();
+  console.log('calling colorInputs(',this.inputs[index],')');
+  this.circuit.colorInputs(this.inputs[index]);
+  this.checkAllInputs();
 };
 
 PlayableCircuit.prototype.checkAllGatesFilled = function() {
@@ -45,12 +67,14 @@ PlayableCircuit.prototype.checkAllInputs = function() {
     }
     var correct = this.isCorrectOutput(outputNodes, outputResult);
     this.correctInputs[inputSet] = correct;
+    this.inputSets[inputSet].setStatus(correct);
     if (!correct) {
       isCorrectForAllInputs = false;
     }
   }
   console.log('isCorrectForAllInputs');
   console.log(isCorrectForAllInputs);
+  this.done = isCorrectForAllInputs;
   return isCorrectForAllInputs;
 };
 

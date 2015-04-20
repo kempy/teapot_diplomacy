@@ -46,14 +46,22 @@ Circuit.prototype.addNodes = function(stage) {
   }
 };
 
+Circuit.prototype.colorInputs = function(inputSet) {
+  for (var i = 0; i < this.inputNodeIndices.length; i++) {
+    var input = this.nodes[this.inputNodeIndices[i]];
+    console.log(input);
+    input.colorInput(inputSet[i]);
+  }
+}
+
 Circuit.prototype.colorConnections = function(outputsList) {
   for (var i = 0; i < this.connections.length; i++) {
-    var color = 'Gray';
+    var color = GLOBALS.UNDEFINED_COLOR;
     if (outputsList) {
       if (outputsList[i] == 1) {
-        color = 'Green';
+        color = GLOBALS.TRUE_COLOR;
       } else {
-        color = 'Blue';
+        color = GLOBALS.FALSE_COLOR;
       }
     }
     for (var j = 0; j < this.connections[i].length; j++) {
