@@ -1,5 +1,5 @@
-var Circuit = function(connection_points, matrix) {
-  this.connection_points = connection_points;
+var Circuit = function(nodes, matrix) {
+  this.nodes = nodes;
   this.matrix = matrix;
   // An array of lists of easeljs nodes representing lines out from nodes;
   this.connections = [];
@@ -12,8 +12,8 @@ Circuit.prototype.addConnections = function(stage) {
 	  for (var j = 0; j < toList.length; j++) {
 	  	var isConnected = toList[j] == 1;
 	  	if (isConnected) {
-	  		var from = this.connection_points[i];
-	  		var to = this.connection_points[j];
+	  		var from = this.nodes[i];
+	  		var to = this.nodes[j];
 	  	  var connection = from.drawTo(to);
 
         // Add connection to connections list
@@ -22,7 +22,13 @@ Circuit.prototype.addConnections = function(stage) {
 	  	}
 	  }
   }
-}
+};
+
+Circuit.prototype.addNodes = function(stage) {
+  for (var node in this.nodes) {
+  	stage.addChild(this.nodes[node].shape);
+  }
+};
 
 Circuit.prototype.colorConnections = function(outputsList) {
   for (var i = 0; i < this.connections.length; i++) {
