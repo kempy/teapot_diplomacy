@@ -11,9 +11,9 @@ Output.prototype.drawTo = Gate.prototype.drawTo;
 
 var createOutputShape = function(x, y) {
   var outputShape = new createjs.Shape();
-  outputShape.graphics.beginFill('CadetBlue').drawCircle(10,10,10);
+  outputShape.graphics.beginFill('CadetBlue').drawCircle(40, 40, 10);
   outputShape.x = x;
   outputShape.y = y;
-  outputShape.setBounds(0, 0, 20, 20);
+  outputShape.setBounds(0, 0, 80, 80);
   return outputShape;
 };

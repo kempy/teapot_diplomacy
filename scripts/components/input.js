@@ -18,9 +18,9 @@ var createInputShape = function(x, y) {
   var inputShape = new createjs.Shape();
   var graphics = inputShape.graphics.beginFill('LightGrey');
   inputShape.shapeCommand = graphics.command;
-  graphics.drawCircle(10, 10, 10);
+  graphics.drawCircle(40, 40, 10);
   inputShape.x = x;
   inputShape.y = y;
-  inputShape.setBounds(0, 0, 20, 20);
+  inputShape.setBounds(0, 0, 80, 80);
   return inputShape;
 };
