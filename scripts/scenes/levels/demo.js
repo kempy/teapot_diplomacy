@@ -22,12 +22,7 @@ var initDemoLevel = function(level) {
 
   var circuit = new Circuit(connection_points, circuit_matrix);
 
-  // Add all lines, then all gates, then all operators.
-  lines = circuit.lines();
-  for (var i = 0; i < lines.length; i++) {
-    stage.addChild(lines[i]);
-  }
-
+  circuit.addConnections(stage);
   stage.addChild(input.shape);
   stage.addChild(gate.shape);
   stage.addChild(otherGate.shape);

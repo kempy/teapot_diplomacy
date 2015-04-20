@@ -22,10 +22,13 @@ Gate.prototype.drawTo = function(otherGate) {
   var line = new createjs.Shape();
   var gateCenter = this.center();
   var otherGateCenter = otherGate.center();
-  line.graphics.beginStroke('Green').moveTo(
+  var graphics = line.graphics.beginStroke('Green');
+  var lineCommand = graphics.command;
+  graphics.moveTo(
   	gateCenter.x, gateCenter.y).lineTo(
   	gateCenter.x, otherGateCenter.y).lineTo(
   	otherGateCenter.x, otherGateCenter.y);
+  line.lineCommand = lineCommand;
   return line;
 };
 
