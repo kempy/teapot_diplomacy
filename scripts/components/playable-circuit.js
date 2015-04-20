@@ -15,29 +15,15 @@ PlayableCircuit.prototype.resetInputs = function () {
   this.circuit.colorConnections(null);
 }
 
-PlayableCircuit.prototype.findAllElementsOfType = function (type) {
-  var nodes = this.circuit.connection_points;
-  var result = [];
-  for (var i=0; i < nodes.length; i++) {
-    if (nodes[i] instanceof type) {
-      result.push(i);
-    }
-  }
-  return result;
-}
-
 PlayableCircuit.prototype.selectInput = function (index) {
   this.selectedInput = index; 
 }
 
 PlayableCircuit.prototype.checkAllInputs = function() {
-  var inputNodes = this.findAllElementsOfType(Input);
-  var outputNodes = this.findAllElementsOfType(Output);
   var isValid = true;
   for (var inputSet = 0; inputSet < this.inputs.length; inputSet++) {
     var inputValues = this.inputs[inputSet];
-    var outputResult = this.circuit.validateCircuit(
-        inputNodes, inputValues, outputNodes);
+    var outputResult = this.circuit.validateCircuit(inputValues);
     if (inputSet == this.selectedInput) {
       this.circuit.colorConnections(outputResult);
     }

@@ -8,29 +8,24 @@ var initDemoLevel = function(level) {
   var otherInput = new Input(300, 25);
   var output = new Output(100, 250);
 
-  var nodes = {
-    0: input,
-    1: otherInput,
-    2: gate,
-    3: otherGate,
-    4: output
-  };
+  var nodes = [input, otherInput, gate, otherGate, output];
   var circuit_matrix = [
     [0, 0, 1, 0, 0],
     [0, 0, 1, 0, 0],
     [0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 1]
+    [0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0]
   ];
 
   var circuit = new Circuit(nodes, circuit_matrix);
   circuit.addConnections(stage);
   circuit.addNodes(stage);
-
+  circuit.validateCircuit([0, 1]);
   stage.addChild(operator.shape);
   stage.addChild(otherOperator.shape);
 
   // Register all gates on the stage.
   stage.gates = [gate, otherGate];
   // Color some of them blue and some of them green.
-  circuit.colorConnections([0,1,1,0]);
+  // circuit.colorConnections([0,1,1,0]);
 };
