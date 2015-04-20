@@ -7,6 +7,7 @@ var initDemoLevel = function(level) {
   var input = new Input(100, 25);
   var otherInput = new Input(300, 25);
   var output = new Output(100, 250);
+  var lm = teapot.levelManager;
 
   var nodes = [input, otherInput, gate, otherGate, output];
   var circuit_matrix = [
@@ -30,4 +31,10 @@ var initDemoLevel = function(level) {
   // Register all gates on the stage.
   stage.gates = [gate, otherGate];
   stage.playableCircuit = playableCircuit;
+
+  level.tick = function() {
+    if (playableCircuit.done) {
+      lm.startLevel('finish');
+    }
+  }
 };
