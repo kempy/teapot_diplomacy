@@ -39,3 +39,9 @@ Circuit.prototype.colorConnections = function(outputsList) {
     }
   }
 };
+
+// Return a matrix of 1s and 0s that is the outputs for each node.
+Circuit.prototype.validateCircuit(inputNodes, inputValues, outputNodes, outputValues) {
+  var resultOutputs = [];
+  return resultOutputs;
+}

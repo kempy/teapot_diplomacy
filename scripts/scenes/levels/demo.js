@@ -33,4 +33,6 @@ var initDemoLevel = function(level) {
 
   // Register all gates on the stage.
   stage.gates = [gate, otherGate];
+  // Color some of them blue and some of them green.
+  circuit.colorConnections([0,1,1,0]);
 };
