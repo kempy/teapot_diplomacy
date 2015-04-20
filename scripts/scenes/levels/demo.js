@@ -19,6 +19,10 @@ var initDemoLevel = function(level) {
   ];
 
   var circuit = new Circuit(nodes, circuit_matrix);
+
+  var layout = new CircuitLayout(50, 50, 400, 400);
+  console.log('Laying out circuit!');
+  layout.layoutCircuit(circuit, [[0, 1], [2], [3], [4]]);
   circuit.addConnections(stage);
   circuit.addNodes(stage);
 
