@@ -8,20 +8,20 @@ function createTextLevel(level) {
     g.beginStroke(line);
     g.beginFill(fill);
     g.drawRoundRect(0,0,size, size, 20);
-    var shape = new createjs.Shape(g); 
+    var shape = new createjs.Shape(g);
     return shape;
-    
+
   }
   stage = level.stage;
-  outerRect = makeRoundedRect('#00ffff', '#0099ff', 450);
+  outerRect = makeRoundedRect('#708090', '#FFFFF0', 550);
   outerRect.x = 25;
   outerRect.y = 25;
   outerRect.addEventListener('click', function(event) {
       window.teapot.levelManager.startLevel(nextLevel);});
   stage.addChild(outerRect);
-  text = new createjs.Text(text, '20px Arial', '#66ffff');
+  text = new createjs.Text(text, '18px Arial', '#2F4F4F');
   text.x = 50;
   text.y = 50;
-  text.lineWidth = 400;
+  text.lineWidth = 500;
   stage.addChild(text);
 }

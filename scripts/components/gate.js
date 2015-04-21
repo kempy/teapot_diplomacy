@@ -34,7 +34,7 @@ Gate.prototype.drawTo = function(otherGate) {
 
 var createGateShape = function(x, y) {
   var snapBox = new createjs.Shape();
-  snapBox.graphics.beginStroke('Blue').beginFill('LightGreen').drawRect(14, 14, 52, 52);
+  snapBox.graphics.beginStroke('Blue').beginFill('LightGrey').drawRect(14, 14, 52, 52);
   snapBox.x = x;
   snapBox.y = y;
   snapBox.setBounds(0, 0, 80, 80)

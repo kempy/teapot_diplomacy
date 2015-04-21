@@ -79,10 +79,12 @@ Operator.prototype.snapToGate = function(gate) {
  * Create block shape.
  */
 Operator.prototype.createOperatorShape = function(x, y) {
-  var block = new createjs.Shape();
-  block.graphics.beginFill('DeepSkyBlue').drawRect(0, 0, 50, 50);
+  var block = new createjs.Bitmap(IMAGE_FILES[this.kind]);
   block.x = x;
   block.y = y;
+  block.alpha = 1;
+  block.width = 50;
+  block.height = 50;
   block.regX = 25;
   block.regY = 25;
   block.setBounds(0, 0, 50, 50);
@@ -125,4 +127,14 @@ OPERATIONS = {
   NOR: NOR_FUNCTION,
   XNOR: XNOR_FUNCTION,
   NOT: NOT_FUNCTION
+};
+
+IMAGE_FILES = {
+  AND: 'resources/and.png',
+  OR: 'resources/or.png',
+  XOR: 'resources/xor.png',
+  NAND: 'resources/nand.png',
+  NOR: 'resources/nor.png',
+  XNOR: 'resources/xnor.png',
+  NOT: 'resources/not.png'
 };
