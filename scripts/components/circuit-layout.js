@@ -24,7 +24,6 @@ CircuitLayout.prototype.layoutPattern = function(pattern) {
 }
 
 CircuitLayout.prototype.layoutCircuit = function(circuit, layout) {
-  console.log('laying out pattern');
   var pattern = this.generatePattern(circuit, layout);
   this.layoutPattern(pattern);
 }
@@ -48,10 +47,8 @@ CircuitLayout.prototype.generatePattern = function(circuit, layout) {
 CircuitLayout.prototype.layoutOperators = function(operators) {
   var verticalInt = this.height / (operators.length + 1);
   var x = (this.operatorWidth / 2);
-  console.log('operators here', operators);
   for (var i = 0; i < operators.length; i++) {
     var operator = operators[i];
-    console.log('operator', operator);
     if (operator != null) {
       var y = verticalInt * (i + 1) + this.y;
       operator.startingPoint['x'] = x;

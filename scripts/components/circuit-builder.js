@@ -9,7 +9,7 @@ var CircuitBuilder = function() {
 }
 
 var NodeBuilder = function(parents, nodeFn, index) {
-  this.parents = nodeFn;
+  this.parents = parents;
   this.nodeFn = nodeFn;
   this.index = index;
 }
@@ -105,13 +105,13 @@ CircuitBuilder.prototype.build = function() {
     }
     nodes.push(this.nodes[i].nodeFn());
   }
-  console.log(nodes);
   for (var i = 0; i < this.nodes.length; i++) {
     var parents = this.nodes[i].parents;
     for (var j = 0; j < parents.length; j++) {
-      matrix[j][i] = 1;
+      matrix[parents[j].index][i] = 1;
     }
   }
+  console.log(matrix);
 
   var circuit = new Circuit(nodes, matrix);
   return circuit;
@@ -131,8 +131,6 @@ CircuitBuilder.prototype.popOutOperators = function(circuit) {
     var gate = circuit.nodes[this.moveableGates[i]];
     var operator = gate.operator;
     gate.operator = null;
-    console.log('gate', gate);
-    console.log('gate op', operator);
     operators.push(operator);
   }
   return operators;
@@ -160,13 +158,10 @@ CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
     stage.removeAllChildren();
 
     var circuit = that.build();
-    console.log('circuit', circuit);
     var layout = that.circuitLayout;
-    console.log('layout', layout);
     that.circuitLayout.layoutCircuit(circuit, that.layoutPattern);
     that.fixGates(circuit);
     var operators = that.popOutOperators(circuit);
-    console.log('operators', operators);
     layout.layoutOperators(operators);
 
     // Stage circuit

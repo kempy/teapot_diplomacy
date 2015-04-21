@@ -23,9 +23,11 @@ Circuit.prototype.findAllElementsOfType = function (type) {
 
 Circuit.prototype.addConnections = function(stage) {
   for (var i = 0; i < this.matrix.length; i++) {
+    console.log('Addding connection idx=', i);
     this.connections[i] = [];
   	var toList = this.matrix[i];
 	  for (var j = 0; j < toList.length; j++) {
+      console.log('Addding connection j=', j);
 	  	var isConnected = toList[j] == 1;
 	  	if (isConnected) {
 	  		var from = this.nodes[i];
