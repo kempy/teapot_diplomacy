@@ -1,43 +1,53 @@
 var Operator = function(kind, x, y) {
   var that = this;
   this.kind = kind;
+  this.disableMove = false;
   this.operation = OPERATIONS[kind];
   this.startingPoint = { 'x': x, 'y': y };
   this.shape = this.createOperatorShape(x, y);
   this.shape.on('pressmove', function(evt) {
-    evt.target.x = evt.stageX;
-    evt.target.y = evt.stageY;
-    printed = false;
+    if (!that.disableMove) {
+      evt.target.x = evt.stageX;
+      evt.target.y = evt.stageY;
+      printed = false;
+    }
   });
+
   this.shape.on('pressup', function(evt) {
-    var operator = that;
-    var gates = evt.target.stage.gates;
-    var noMatch = true;
-    // Check if the operator instersects any of the gates.
-    for (var i = 0; i < gates.length; i++) {
-      var gate = gates[i];
-      if (operator.checkIntersection(gate.shape) && !gate.isFull()) {
-        noMatch = false;
-        operator.snapToGate(gate);
-      } else if (gate.containsOperator(operator)) {
-        gate.operator = null;
-      }
-    };
-    // If the operator does not intersect, check all the gates for the operator to clear.
-    if (noMatch) {
+    if (!that.disableMove) {
+      var operator = that;
+      var gates = evt.target.stage.gates;
+      var noMatch = true;
+      // Check if the operator instersects any of the gates.
       for (var i = 0; i < gates.length; i++) {
         var gate = gates[i];
-        if (gate.containsOperator(operator)) {
+        if (operator.checkIntersection(gate.shape) && !gate.isFull()) {
+          noMatch = false;
+          operator.snapToGate(gate);
+        } else if (gate.containsOperator(operator)) {
           gate.operator = null;
         }
       };
-      operator.snapToStartingPoint();
+      // If the operator does not intersect, check all the gates for the operator to clear.
+      if (noMatch) {
+        for (var i = 0; i < gates.length; i++) {
+          var gate = gates[i];
+          if (gate.containsOperator(operator)) {
+            gate.operator = null;
+          }
+        };
+        operator.snapToStartingPoint();
+      }
+      evt.target.stage.playableCircuit.checkAllInputs();
     }
-    evt.target.stage.playableCircuit.checkAllInputs();
   });
 };
 
 var printed = false;
+
+Operator.prototype.fixOperator = function() {
+  this.disableMove = true;
+}
 
 Operator.prototype.checkIntersection = function(gateShape) {
   var absoluteBounds = this.shape.getTransformedBounds();

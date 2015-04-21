@@ -42,6 +42,7 @@ Circuit.prototype.addConnections = function(stage) {
 
 Circuit.prototype.addNodes = function(stage) {
   for (var node in this.nodes) {
+    console.log('node', node);
   	stage.addChild(this.nodes[node].shape);
   }
 };

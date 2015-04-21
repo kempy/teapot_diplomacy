@@ -1,3 +1,22 @@
+var createDemoLevelInitFn = function(nextLevel) {
+  var builder = new CircuitBuilder();
+  var input1 = builder.addInput(); // 0
+  var input2 = builder.addInput(); // 1
+  var andGate = builder.addBinaryGate('AND', input1, input2, false); // 2
+  var notGate = builder.addUnaryGate('NOT', andGate, false); // 3
+  var output = builder.addOutput(notGate, 1); // 4 
+  var layoutPattern = [
+    [input1.index, input2.index],
+    [andGate.index],
+    [notGate.index],
+    [output.index]
+  ];
+  builder.addLayoutPattern(layoutPattern);
+  builder.addInputSet([1,0]);
+  builder.addInputSet([0,1]);
+  return builder.buildLevelInitFn(nextLevel);
+};
+
 var initDemoLevel = function(level) {
   var stage = level.stage;
   var operator = new Operator('AND', 50, 100);
@@ -23,7 +42,7 @@ var initDemoLevel = function(level) {
   var layout = new CircuitLayout(-50, 0,  450, 600);
   console.log('Laying out circuit!');
   layout.layoutCircuit(circuit, [[0, 1], [2], [3], [4], [], []]);
-  layout.layoutOperators([operator, null, null, null, otherOperator]);
+  layout.layoutOperators([operator, otherOperator]);
   circuit.addConnections(stage);
   circuit.addNodes(stage);
 
