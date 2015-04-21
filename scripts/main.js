@@ -32,7 +32,7 @@ teapot.init = function() {
       "By placing these operators in the correct gates on our circuit board, we'll create the desired output - and hopefully eventually world peace.\n\n" +
       "In the game, please click on all the 'sets' of input on the side, to try out the given input." +
       "Click to play.");
-  instructionsScreen.params.nextLevel = 'level4';
+  instructionsScreen.params.nextLevel = 'level8';
 
   endScreen.params.text = (
       "Teapot Diplomacy\n\n" +
@@ -72,32 +72,42 @@ interstitialLevel4_5 = lm.createLevel('interstitialLevel4_5', createTextLevel);
 interstitialLevel4_5.params.text = (
   "Congrats! We weighed the tea.\n\n" +
   "Next we need to add the tea. Please set the gates.");
+interstitialLevel4_5.params.nextLevel = 'level5';
+
 
 interstitialLevel5_6 = lm.createLevel('interstitialLevel5_6', createTextLevel);
 interstitialLevel5_6.params.text = (
   "Congrats! We added the tea.\n\n" +
   "We need to start the timer so we don't steep too long. Please set the gates.");
+interstitialLevel5_6.params.nextLevel = 'level6';
 
 interstitialLevel6_7 = lm.createLevel('interstitialLevel6_7', createTextLevel);
 interstitialLevel6_7.params.text = (
   "Congrats! We started the timer.\n\n" +
   "We need the music on the timer to be soft and soothing, as opposed to jarring. Please set the gates.");
+interstitialLevel6_7.params.nextLevel = 'level7';
 
 interstitialLevel7_8 = lm.createLevel('interstitialLevel7_8', createTextLevel);
 interstitialLevel7_8.params.text = (
   "Congrats! We have melodic music.\n\n" +
   "Next we need to pour the tea. Please set the gates.");
+interstitialLevel7_8.params.nextLevel = 'level8';
 
 interstitialLevel8_9 = lm.createLevel('interstitialLevel8_9', createTextLevel);
 interstitialLevel8_9.params.text = (
-  "Congrats! We can pour the tea.\n\n" +
-  "Almost done! We need apply the filter, no matter whether it's large looseleaf or small. Please set the gates.");
+  "Congrats! We can pour the tea.\n\n" // +
+  // "Almost done! We need apply the filter, no matter whether it's large looseleaf or small. Please set the gates.");
+  );
+interstitialLevel8_9.params.nextLevel = 'finish';
 
   lm.createLevel('level1', createLevelOneFn('interstitialLevel1_2'));
   lm.createLevel('level2', createLevelTwoFn('interstitialLevel2_3'));
   lm.createLevel('level3', createLevelThreeFn('interstitialLevel3_4'));
   lm.createLevel('level4', createLevelFourFn('interstitialLevel4_5'));
-
+  lm.createLevel('level5', createLevelFiveFn('interstitialLevel5_6'));
+  lm.createLevel('level6', createLevelSixFn('interstitialLevel6_7'));
+  lm.createLevel('level7', createLevelSevenFn('interstitialLevel7_8'));
+  lm.createLevel('level8', createLevelEightFn('interstitialLevel8_9'));
 
   // Start at the demo level.
   lm.startLevel('start');

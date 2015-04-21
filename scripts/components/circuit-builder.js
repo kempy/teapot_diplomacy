@@ -154,6 +154,28 @@ CircuitBuilder.prototype.addExtraOperator = function(op) {
   this.extraOperators.push(op);
 }
 
+/**
+ * Copied from 
+ * http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array.
+ */
+CircuitBuilder.prototype.randomizeArray = function (array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 
 CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
   var that = this;
@@ -172,6 +194,8 @@ CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
       var op = new Operator(that.extraOperators[i], 0, 0);
       operators.push(op);
     }
+    that.randomizeArray(operators);
+
     layout.layoutOperators(operators);
 
     // Stage circuit
@@ -182,6 +206,10 @@ CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
     // Stage operators.
     for (var i = 0; i < operators.length; i++) {
       stage.addChild(operators[i].shape);
+    }
+
+    for (var i = 0; i < that.fixedGates.length; i++) {
+      stage.addChild(circuit.nodes[that.fixedGates[i]].operator.shape);
     }
 
     // Stage input sets

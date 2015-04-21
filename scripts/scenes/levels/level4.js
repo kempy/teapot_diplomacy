@@ -11,11 +11,11 @@ var createLevelFourFn = function(nextLevel) {
   var output2 = builder.addOutput(xnorGate, 1);
   var layoutPattern = [
     [input1.index, input2.index, input3.index, input4.index],
-    [],
+    [norGate.index, xnorGate.index],
     [output1.index, output2.index]
   ];
   builder.addLayoutPattern(layoutPattern);
   builder.addInputSet([0, 0, 1, 1]);
-  builder.addInputSet([0, 0, 1, 0]);
+  builder.addInputSet([0, 0, 0, 0]);
   return builder.buildLevelInitFn(nextLevel);
 };
