@@ -6,6 +6,7 @@ var CircuitBuilder = function() {
   this.inputSets = [];
   this.circuitLayout = new CircuitLayout(-50, 0,  450, 600);
   this.layoutPattern = null;
+  this.extraOperators = [];
 }
 
 var NodeBuilder = function(parents, nodeFn, index) {
@@ -149,6 +150,11 @@ CircuitBuilder.prototype.getAllGates = function(circuit) {
   return gates;
 }
 
+CircuitBuilder.prototype.addExtraOperator = function(op) {
+  this.extraOperators.push(op);
+}
+
+
 CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
   var that = this;
   var lm = teapot.levelManager;
@@ -162,6 +168,10 @@ CircuitBuilder.prototype.buildLevelInitFn = function(nextLevel) {
     that.circuitLayout.layoutCircuit(circuit, that.layoutPattern);
     that.fixGates(circuit);
     var operators = that.popOutOperators(circuit);
+    for (var i=0; i < that.extraOperators.length; i++) {
+      var op = new Operator(that.extraOperators[i], 0, 0);
+      operators.push(op);
+    }
     layout.layoutOperators(operators);
 
     // Stage circuit

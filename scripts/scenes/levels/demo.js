@@ -14,6 +14,8 @@ var createDemoLevelInitFn = function(nextLevel) {
   builder.addLayoutPattern(layoutPattern);
   builder.addInputSet([1,0]);
   builder.addInputSet([0,1]);
+  builder.addExtraOperator('NAND');
+  builder.addExtraOperator('XOR');
   return builder.buildLevelInitFn(nextLevel);
 };
 
