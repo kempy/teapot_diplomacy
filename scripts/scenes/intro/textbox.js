@@ -13,6 +13,7 @@ function createTextLevel(level) {
 
   }
   stage = level.stage;
+
   outerRect = makeRoundedRect('#708090', '#FFFFF0', 550);
   outerRect.x = 25;
   outerRect.y = 25;
@@ -24,4 +25,11 @@ function createTextLevel(level) {
   text.y = 50;
   text.lineWidth = 500;
   stage.addChild(text);
+
+  var teapotImage = new createjs.Bitmap('resources/teapot.png');
+  teapotImage.x = 392;
+  teapotImage.y = 470;
+  teapotImage.scaleX = 0.5;
+  teapotImage.scaleY = 0.5;
+  stage.addChild(teapotImage);
 }
