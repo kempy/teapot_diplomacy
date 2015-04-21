@@ -15,8 +15,8 @@ var createLevelThreeFn = function(nextLevel) {
   var output3 = builder.addOutput(andGate, 1);
   var layoutPattern = [
     [input1.index, input2.index, input3.index, input4.index, input5.index, input6.index],
-    [-1, nandGate.index, -1, orGate.index, -1, andGate.index],
-    [-1, output1.index -1, output2.index, -1, output3.index]
+    [nandGate.index, orGate.index, andGate.index],
+    [output1.index, output2.index, output3.index]
   ];
   builder.addLayoutPattern(layoutPattern);
   builder.addInputSet([0, 1, 0, 1, 1, 1]);
