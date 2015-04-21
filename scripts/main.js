@@ -27,10 +27,10 @@ teapot.init = function() {
   startScreen.params.nextLevel = 'instructions';
   instructionsScreen.params.text = (
       "Teapot Diplomacy Instructions\n\n" +
-      "All of our inputs will be in binary — 1’s and 0’s. And we will use the following operators: NOT, AND, OR, NOR, NAND, XOR, XNOR.\n\n" +
-      "By placing these operators in the correct gates on our circuit board, we’ll create the desired output — and hopefully eventually world peace.\n\n" +
+      "All of our inputs will be in binary: 1's and 0's. And we will use the following operators: NOT, AND, OR, NOR, NAND, XOR, XNOR.\n\n" +
+      "By placing these operators in the correct gates on our circuit board, we'll create the desired output - and hopefully eventually world peace.\n\n" +
       "Click to play.");
-  instructionsScreen.params.nextLevel = 'demo';
+  instructionsScreen.params.nextLevel = 'level1';
 
   endScreen.params.text = (
       "Teapot Diplomacy\n\n" +
@@ -47,6 +47,9 @@ teapot.init = function() {
       "So, as you can see, this teapot has been successful in its mission! Stay tuned for our next project, where we make the perfect travel coffee maker for archaeologists on digs, in order to facilitate alertness and advance science.\n\n" +
       "Teapot Diplomacy! An unexpected weapon for good!");
   endScreen.params.nextLevel = 'start';
+
+  lm.createLevel('level1', createLevelOneFn('level2'));
+  lm.createLevel('level2', createLevelTwoFn('finish'));
 
   // Start at the demo level.
   lm.startLevel('start');
