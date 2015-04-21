@@ -32,7 +32,7 @@ teapot.init = function() {
       "By placing these operators in the correct gates on our circuit board, we'll create the desired output - and hopefully eventually world peace.\n\n" +
       "In the game, please click on all the 'sets' of input on the side, to try out the given input." +
       "Click to play.");
-  instructionsScreen.params.nextLevel = 'level1';
+  instructionsScreen.params.nextLevel = 'level4';
 
   endScreen.params.text = (
       "Teapot Diplomacy\n\n" +
@@ -66,8 +66,8 @@ interstitialLevel3_4 = lm.createLevel('interstitialLevel3_4', createTextLevel);
 interstitialLevel3_4.params.text = (
   "Congrats! We can now adjust the burner.\n\n" +
   "Next we need to weigh the tea. Please set the gates.");
-interstitialLevel3_4.params.nextLevel = 'finish';
-// TODO(change finish).
+interstitialLevel3_4.params.nextLevel = 'level4';
+
 interstitialLevel4_5 = lm.createLevel('interstitialLevel4_5', createTextLevel);
 interstitialLevel4_5.params.text = (
   "Congrats! We weighed the tea.\n\n" +
@@ -96,6 +96,7 @@ interstitialLevel8_9.params.text = (
   lm.createLevel('level1', createLevelOneFn('interstitialLevel1_2'));
   lm.createLevel('level2', createLevelTwoFn('interstitialLevel2_3'));
   lm.createLevel('level3', createLevelThreeFn('interstitialLevel3_4'));
+  lm.createLevel('level4', createLevelFourFn('interstitialLevel4_5'));
 
 
   // Start at the demo level.
