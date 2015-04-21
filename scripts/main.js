@@ -27,8 +27,8 @@ teapot.init = function() {
   startScreen.params.nextLevel = 'instructions';
   instructionsScreen.params.text = (
       "Teapot Diplomacy Instructions\n\n" +
-      "All of our inputs will be in binary — 1’s and 0’s. And we will use the following operators: NOT, AND, OR, NOR, NAND, XOR, XNOR.\n\n" +
-      "By placing these operators in the correct gates on our circuit board, we’ll create the desired output — and hopefully eventually world peace.\n\n" +
+      "All of our inputs will be in binary: 1's and 0's. And we will use the following operators: NOT, AND, OR, NOR, NAND, XOR, XNOR.\n\n" +
+      "By placing these operators in the correct gates on our circuit board, we'll create the desired output - and hopefully eventually world peace.\n\n" +
       "Click to play.");
   instructionsScreen.params.nextLevel = 'demo';
 
