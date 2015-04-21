@@ -32,7 +32,7 @@ teapot.init = function() {
       "By placing these operators in the correct gates on our circuit board, we'll create the desired output - and hopefully eventually world peace.\n\n" +
       "In the game, please click on all the 'sets' of input on the side, to try out the given input." +
       "Click to play.");
-  instructionsScreen.params.nextLevel = 'level8';
+  instructionsScreen.params.nextLevel = 'level1';
 
   endScreen.params.text = (
       "Teapot Diplomacy\n\n" +
