@@ -48,7 +48,8 @@ teapot.init = function() {
       "Teapot Diplomacy! An unexpected weapon for good!");
   endScreen.params.nextLevel = 'start';
 
-  lm.createLevel('level1', createLevelOneFn('finish'));
+  lm.createLevel('level1', createLevelOneFn('level2'));
+  lm.createLevel('level2', createLevelTwoFn('finish'));
 
   // Start at the demo level.
   lm.startLevel('start');
