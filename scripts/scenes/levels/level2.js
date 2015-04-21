@@ -11,6 +11,6 @@ var createLevelTwoFn = function(nextLevel) {
     [output.index]
   ];
   builder.addLayoutPattern(layoutPattern);
-  builder.addInputSet([0]);
+  builder.addInputSet([1, 1]);
   return builder.buildLevelInitFn(nextLevel);
 };
